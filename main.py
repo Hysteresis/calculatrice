@@ -6,30 +6,28 @@ result = []
 def on_key_press(event):
     addition = 0
     current_text = entry.get()
-    if event.char.isdigit() or event.char in "+-*/":
-        result.append(current_text)
-        print(result)
-    elif event.char.isalpha():
+    try:
+        result = eval(current_text)
+        if event.keysym == "Return":
+            print(result)
+            entry_result.delete(0, tk.END)
+            entry_result.insert(0, str(result))
+
+    except SyntaxError:
         pass
-    elif event.keysym == "BackSpace":
-        clear_char()
-    elif event.keysym == "Return":
-        print(result[-1])
-        arr = result[-1].split("+")
-        for element in arr:
-            addition += float(element)
-        print(addition)
-        entry_result.delete(0, tk.END)
-        entry_result.insert(tk.END, str(addition))
-        return addition
-    else:
-        pass
+
+
+
 
 
 def clear_char():
     current_text = entry.get()
     if current_text:
-        entry.delete(len(current_text) - 1)
+        entry.delete(len(current_text))
+        print(entry)
+
+
+    return entry
 
 
 if __name__ == "__main__":
