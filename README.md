@@ -20,10 +20,13 @@ git clone https://github.com/Hysteresis/calculatrice.git
 
 ## Description des boutons
 - Bouton 'Clear' : efface l'affichage en cours
+
 ![ecran de l'application](images/clear.png)
+
 - Bouton 'History' : ouvre le menu déroulant contenant l'historique des calculs stocké dans le fichier
   "**calcul_history.csv**"
 - Menu déroulant : affiche la liste de tous les calculs effectués
+
   ![ecran de l'application](images/history.png)
   
 
