@@ -8,6 +8,12 @@ path = "calcul_history.csv"
 
 
 def on_key_press(event):
+    """
+    Fonction appelée en réponse à l'événement de pression de touche.
+
+    :param event: L'événement clavier déclenché.
+    :return: Aucun.
+    """
     current_text = entry.get()
     try:
         if event.keysym == "Return":
@@ -26,21 +32,29 @@ def on_key_press(event):
         label_error.config(text=str(e))
 
 
-def clear_char(event):
-    current_text = entry.get()
-    if current_text:
-        entry.delete(len(current_text))
-        print(entry)
-    return entry
-
-
 def clear_screen():
+    """
+    Efface l'écran en réinitialisant les champs d'entrée et de résultat,
+    et supprime le message d'erreur affiché.
+
+    :return: Aucun.
+    """
     label_error.config(text="")
     entry.delete(0, tk.END)
     entry_result.delete(0,tk.END)
 
 
 def on_combobox_select(event, combobox, entry, entry_result, df):
+    """
+    Fonction appelée en réponse à la sélection d'un élément dans une combobox.
+
+    :param event: L'événement déclenché.
+    :param combobox: La combobox à partir de laquelle l'événement a été déclenché.
+    :param entry: Le champ d'entrée à mettre à jour.
+    :param entry_result: Le champ de résultat à mettre à jour.
+    :param df: Le DataFrame contenant les données historiques.
+    :return: Aucun.
+    """
     selected_calculation = combobox.get()
     selected_result = df.loc[df['CALCUL'] == selected_calculation, 'RESULTAT'].values[0]
     entry.delete(0, tk.END)
@@ -50,6 +64,11 @@ def on_combobox_select(event, combobox, entry, entry_result, df):
 
 
 def display_history():
+    """
+    Affiche l'historique des calculs dans une combobox pour une sélection ultérieure.
+
+    :return: Aucun.
+    """
     df = pd.read_csv(path)
     selected_line = df['CALCUL'].tolist()
     combobox = ttk.Combobox(root, values=selected_line)
@@ -84,7 +103,6 @@ if __name__ == "__main__":
     # display error
     label_error = tk.Label(root, text="...", pady=30)
     label_error.grid(row=3, column=1)
-
 
     # configure columns
     for i in range(3):
