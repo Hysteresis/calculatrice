@@ -4,10 +4,12 @@
 - ouvrir le fichier de test "cahier_de_tests_calculatrice_Pierre.xlsx"
 - vérifier que les tests fonctionnent
 
-## Ennoncé
+## Ennoncé du formateur
 En utilisant **Tkinter**, votre mission sera de réaliser une **calculatrice**.
 
-La contrainte à ce projet, est que la calculatrice ne possède qu’au **maximum trois boutons** :
+La contrainte à ce projet, est que la calculatrice ne possède qu’au **maximum trois boutons**
+
+## Description des boutons
 - Bouton 'Clear' : efface l'affichage en cours
 - Bouton 'History' : ouvre le menu déroulant contenant l'historique des calculs stocké dans le fichier 
 "**calcul_history.csv**"

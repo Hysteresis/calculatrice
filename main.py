@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 import pandas as pd
 
-# result = []
 result_history = []
 path = "calcul_history.csv"
 
@@ -18,7 +17,6 @@ def on_key_press(event):
     try:
         if event.keysym == "Return":
             result = eval(current_text)
-            print(result)
             entry_result.delete(0, tk.END)
             entry_result.insert(0, str(result))
             entry.delete(0, tk.END)
@@ -26,7 +24,7 @@ def on_key_press(event):
             result_history.append({'CALCUL': current_text, 'RESULTAT': result})
             history_df = pd.DataFrame(result_history)
             history_df.to_csv(path, index=False)
-            label_error.config(text="...")
+            label_error.config(text="")
 
     except (SyntaxError, ValueError, NameError,ZeroDivisionError) as e:
         label_error.config(text=str(e))
