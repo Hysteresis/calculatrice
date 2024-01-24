@@ -17,8 +17,7 @@ def on_key_press(event):
     try:
         if event.keysym == "Return":
             result = eval(current_text)
-            entry_result.delete(0, tk.END)
-            entry_result.insert(0, str(result))
+            label_result.config(text=str(result))
             entry.delete(0, tk.END)
             entry.insert(0, current_text)
             result_history.append({'CALCUL': current_text, 'RESULTAT': result})
@@ -39,17 +38,17 @@ def clear_screen():
     """
     label_error.config(text="")
     entry.delete(0, tk.END)
-    entry_result.delete(0,tk.END)
+    label_result.config(text="")
 
 
-def on_combobox_select(event, combobox, entry, entry_result, df):
+def on_combobox_select(event, combobox, entry, label_result, df):
     """
     Fonction appelée en réponse à la sélection d'un élément dans une combobox.
 
     :param event: L'événement déclenché.
     :param combobox: La combobox à partir de laquelle l'événement a été déclenché.
     :param entry: Le champ d'entrée à mettre à jour.
-    :param entry_result: Le champ de résultat à mettre à jour.
+    :param label_result: Le champ de résultat à mettre à jour.
     :param df: Le DataFrame contenant les données historiques.
     :return: Aucun.
     """
@@ -57,8 +56,7 @@ def on_combobox_select(event, combobox, entry, entry_result, df):
     selected_result = df.loc[df['CALCUL'] == selected_calculation, 'RESULTAT'].values[0]
     entry.delete(0, tk.END)
     entry.insert(0, selected_calculation)
-    entry_result.delete(0, tk.END)
-    entry_result.insert(0, selected_result)
+    label_result.config(text=str(selected_result))
 
 
 def display_history():
@@ -71,7 +69,7 @@ def display_history():
     selected_line = df['CALCUL'].tolist()
     combobox = ttk.Combobox(root, values=selected_line)
     combobox.grid(row=2, column=3, sticky="nsew")
-    combobox.bind("<<ComboboxSelected>>", lambda event: on_combobox_select(event, combobox, entry, entry_result, df))
+    combobox.bind("<<ComboboxSelected>>", lambda event: on_combobox_select(event, combobox, entry, label_result, df))
 
 
 if __name__ == "__main__":
@@ -87,8 +85,8 @@ if __name__ == "__main__":
     root.bind('<Key>', on_key_press)
 
     # 2nd screen: display the result
-    entry_result = tk.Entry(root, bg="#98FB98")
-    entry_result.grid(row=1, column=0, columnspan=4, sticky="ew")
+    label_result = tk.Label(root, bg="#98FB98", anchor="w")
+    label_result.grid(row=1, column=0, columnspan=4, sticky="ew")
 
     # clear the screen
     clear = tk.Button(root, text="Clear", command=clear_screen)
