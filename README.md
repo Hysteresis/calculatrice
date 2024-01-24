@@ -1,9 +1,8 @@
 # Projet "**Calculatrice**"
-- version de python : 3.10 ou supérieure
-- créer un fichier "**calcul_history.csv**" dans le dossier racine
-- dans le dossier "test" ouvrir le fichier de test "cahier_de_tests_calculatrice_Pierre.xlsx"
+- version de python : **3.10** ou **supérieure**
+- créer un fichier "**calcul_history.csv**" dans le dossier racine sauf si ce fichier est déja créé
+- ouvrir le fichier de test "cahier_de_tests_calculatrice_Pierre.xlsx"
 - vérifier que les tests fonctionnent
-
 
 ## Ennoncé
 En utilisant **Tkinter**, votre mission sera de réaliser une **calculatrice**.
@@ -36,5 +35,3 @@ Pierre Marboutin
 
 ## Date de rendu
 24/01/24
-
-
