@@ -67,9 +67,13 @@ def display_history():
     """
     df = pd.read_csv(path)
     selected_line = df['CALCUL'].tolist()
-    combobox = ttk.Combobox(root, values=selected_line)
+    combobox = ttk.Combobox(root, values=selected_line, state="readonly")
     combobox.grid(row=2, column=3, sticky="nsew")
     combobox.bind("<<ComboboxSelected>>", lambda event: on_combobox_select(event, combobox, entry, label_result, df))
+    combobox.event_generate("<1>")
+    if selected_line:
+        combobox.set(selected_line[0])
+    combobox['state'] = 'normal'
 
 
 if __name__ == "__main__":
@@ -85,7 +89,7 @@ if __name__ == "__main__":
     root.bind('<Key>', on_key_press)
 
     # 2nd screen: display the result
-    label_result = tk.Label(root, bg="#98FB98", anchor="w")
+    label_result = tk.Label(root, bg="lightgray", anchor="w")
     label_result.grid(row=1, column=0, columnspan=4, sticky="ew")
 
     # clear the screen
@@ -97,7 +101,7 @@ if __name__ == "__main__":
     history.grid(row=2, column=1)
 
     # display error
-    label_error = tk.Label(root, text="...", pady=30)
+    label_error = tk.Label(root, text="", pady=30)
     label_error.grid(row=3, column=1)
 
     # configure columns
